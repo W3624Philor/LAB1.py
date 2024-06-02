@@ -85,7 +85,7 @@ def gene():
         end = time.perf_counter()
         print("生成新文本时间： %f 秒" % (end - start))
     l_newTxt = tk.Label(frame, text=newTxt)
-    l_newTxt.grid(row=2, column=0)
+    l_newTxt.grid(row=2, column=0,columnspan=1000)
 
 
 def geneNewTextFrame():

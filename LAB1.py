@@ -13,8 +13,9 @@ def readText(fileName):
     for char in txt:
         if char in punctuation or char == "\n" or char == " ":
             text = text + " "
-        elif 97 <= ord(char) <= 122:
+        elif 97 <= ord(char) <= 122 :
             text = text + char
+    print(text)
     text = text.split()
     return text
 
@@ -41,7 +42,8 @@ def showDirectedGraph(chart, graph, path=None):
         for j in range(len(chart)):
             if graph[i, j] > 0:
                 G.add_edge(chart[i], chart[j], weight=graph[i, j])  # 添加带权边，weight表示边权
-    pos = nx.circular_layout(G)
+    pos = nx.kamada_kawai_layout(G)
+    plt.rcParams['figure.figsize'] = (12, 6)
     nx.draw(G, pos, with_labels=True, alpha=0.5)
     labels = nx.get_edge_attributes(G, 'weight')
     nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
@@ -115,8 +117,8 @@ def generateNewText(inputText, graph, chart):
                 if graph[index1][j] != 0 and graph[j][index2] != 0:
                     bridge.append(chart[j])
             if len(bridge) > 0:
-                txt.insert(ind, random.choice(bridge))
                 ind = ind + 1
+                txt.insert(ind, random.choice(bridge))
         ind = ind + 1
 
     text = ""
